@@ -2,8 +2,8 @@ package com.example.nvcshop.dto.response;
 
 import lombok.*;
 
-import java.util.Collection;
-import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,8 +14,12 @@ public class ProductResponse {
     private String id;
     private String name;
     private String slug;
-    private Collection<TypeResponse> type;
-    private Collection<ProductDetailResponse> productDetail;
-    private Date createAt;
-    private Date lastModify;
+
+    private String image1;
+    private String image2;
+    private String image3;
+
+    private List<TypeResponse> typeResponses;
+    private Set<String> sizes;
+    private Set<String> colors;
 }

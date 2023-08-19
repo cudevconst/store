@@ -9,9 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "product")
@@ -30,6 +28,16 @@ public class Product {
     private String name;
     private String slug;
 
+    private String image1;
+    private String image2;
+    private String image3;
+
+    @ElementCollection
+    private Set<String> sizes = new HashSet<>();
+
+    @ElementCollection
+    private Set<String> color = new HashSet<>();
+
     @PrePersist
     private void generateSlug() {
         if (StringUtils.isEmpty(this.slug)) {
@@ -46,16 +54,17 @@ public class Product {
     @LastModifiedDate
     private Date lastModify;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Collection<TypeProduct> typeProducts;
+    @ManyToMany
+    @JoinTable(
+            name = "type_product",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_id"))
+    private List<Type> types;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Collection<ProductDetails> productDetails;
+    private List<CartProduct> cartProducts;
 
-
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<OrderProduct> orderProducts;
 
 }

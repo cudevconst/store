@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/sign-in")
-    public ResponseEntity<?> signInUser(@RequestParam("email") String email, @RequestParam("password") String password){
+    public ResponseEntity<?> signInUser(@RequestParam("email") String email, @RequestParam("password") String password ){
         UserResponse userResponse = userService.checkAccount(email, password);
         if(userResponse != null){
             return ResponseEntity.status(200).body(userResponse);

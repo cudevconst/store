@@ -23,6 +23,10 @@ public class OrderProduct {
     private String id;
 
     private Integer quantity;
+
+    private String size;
+
+    private String color;
     @CreatedDate
     private Date bookingDate;
 
@@ -35,9 +39,8 @@ public class OrderProduct {
     @ToString.Exclude
     private Order order;
 
+
     @ManyToOne
-    @JoinColumn(name = "product_detail_id")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private ProductDetails productDetail;
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

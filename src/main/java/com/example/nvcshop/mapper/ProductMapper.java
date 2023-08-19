@@ -1,9 +1,7 @@
 package com.example.nvcshop.mapper;
 
-import com.example.nvcshop.dto.request.ProductRequest;
 import com.example.nvcshop.dto.response.ProductResponse;
 import com.example.nvcshop.entity.Product;
-import com.example.nvcshop.entity.TypeProduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,25 +12,29 @@ public class ProductMapper {
                 .id(product.getId())
                 .name(product.getName())
                 .slug(product.getSlug())
-                .createAt(product.getCreateAt())
-                .lastModify(product.getLastModify())
+                .colors(product.getColor())
+                .sizes(product.getSizes())
+                .image1(product.getImage1())
+                .image2(product.getImage2())
+                .image3(product.getImage3())
+                .typeResponses(TypeMapper.toListResponse(product.getTypes()))
                 .build();
         return productResponse;
     }
 
-    public static List<ProductResponse> toListResponse(List<Product> list){
+//    public static List<ProductResponse> toListResponse(List<Product> list){
+//        List<ProductResponse> productResponseList = new ArrayList<>();
+//        for(Product p : list){
+//            productResponseList.add(toResponse(p));
+//        }
+//        return productResponseList;
+//    }
+
+    public static List<ProductResponse> toListResponse(List<Product> products) {
         List<ProductResponse> productResponseList = new ArrayList<>();
-        for(Product p : list){
-            ProductResponse productResponse = toResponse(p);
-            productResponseList.add(productResponse);
+        for(Product p : products){
+            productResponseList.add(toResponse(p));
         }
         return productResponseList;
-    }
-
-    public static Product toEntity(ProductRequest productRequest){
-        Product product = Product.builder()
-                .name(productRequest.getName())
-                .build();
-        return product;
     }
 }

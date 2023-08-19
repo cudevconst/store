@@ -9,14 +9,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "cart")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Cart {
     @Id
@@ -24,7 +25,21 @@ public class Cart {
     @GenericGenerator(name="uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    private Integer amount;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "cart_product",
+//            joinColumns = @JoinColumn(name = "product_id"),
+//            inverseJoinColumns = @JoinColumn(name = "cart_id"))
+//    private List<Product> products;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private User user;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<CartProduct> cartProducts;
 
 
     @CreatedDate
@@ -32,18 +47,4 @@ public class Cart {
 
     @LastModifiedDate
     private Date lastModify;
-//
-//    @OneToOne
-//    @JoinColumn(name = "user_id")
-//    @EqualsAndHashCode.Exclude
-//    @ToString.Exclude
-//    private User user;
-
-    @ManyToMany
-    @JoinTable(
-            name = "cart_product",
-            joinColumns = @JoinColumn(name = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Collection<ProductDetails> products;
 }

@@ -27,7 +27,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name="uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
     @Column(unique = true)
@@ -45,16 +45,16 @@ public class User {
 
     @LastModifiedDate
     private Date lastModify;
-
+    
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Collection<Address> addresses;
 
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    @EqualsAndHashCode.Exclude
-//    @ToString.Exclude
-//    private Cart cart;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Cart cart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude

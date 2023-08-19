@@ -2,7 +2,9 @@ package com.example.nvcshop.service;
 
 import com.example.nvcshop.dto.request.UserRequest;
 import com.example.nvcshop.dto.response.UserResponse;
+import com.example.nvcshop.entity.Cart;
 import com.example.nvcshop.entity.User;
+import com.example.nvcshop.repository.CartRepository;
 import com.example.nvcshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CartRepository cartRepository;
     public UserResponse checkAccount(String email, String password){
         Optional<User> userOptional = userRepository.findByEmailAndPassword(email, password);
         if(userOptional.isPresent()){
@@ -72,6 +76,10 @@ public class UserService {
                     .role("user")
                     .build();
             userRepository.save(user);
+            Cart cart = Cart.builder()
+                    .user(user)
+                    .build();
+            cartRepository.save(cart);
             UserResponse userResponse = UserResponse.builder()
                     .id(user.getId())
                     .email(user.getEmail())

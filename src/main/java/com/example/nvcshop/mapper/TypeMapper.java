@@ -3,7 +3,6 @@ package com.example.nvcshop.mapper;
 import com.example.nvcshop.dto.request.TypeRequest;
 import com.example.nvcshop.dto.response.TypeResponse;
 import com.example.nvcshop.entity.Type;
-import com.example.nvcshop.entity.TypeProduct;
 
 import java.util.ArrayList;
 import java.util.List;

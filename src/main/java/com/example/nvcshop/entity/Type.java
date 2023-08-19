@@ -32,8 +32,6 @@ public class Type {
     @LastModifiedDate
     private Date lastModify;
 
-    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Collection<TypeProduct> typeProducts;
+    @ManyToMany(mappedBy = "types")
+    private Collection<Product> products;
 }

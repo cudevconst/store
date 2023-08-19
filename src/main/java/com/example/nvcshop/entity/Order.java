@@ -22,7 +22,7 @@ public class Order {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-
+    private Double amount;
     @CreatedDate
     private Date createAt;
 
@@ -39,7 +39,7 @@ public class Order {
     @JoinColumn(name = "address_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private User address;
+    private Address address;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
