@@ -17,12 +17,15 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Order {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
     private Double amount;
+    private String status;
+
     @CreatedDate
     private Date createAt;
 

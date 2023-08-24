@@ -15,6 +15,6 @@ public class OrderProductResponse {
 
     private String color;
 
-    private ProductResponse productResponse;
+    private ProductResponse product;
 
 }

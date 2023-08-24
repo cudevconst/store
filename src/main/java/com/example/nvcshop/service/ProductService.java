@@ -24,6 +24,25 @@ public class ProductService {
     @Autowired
     private TypeRepository typeRepository;
 
+    public List<ProductResponse> findAllProduct(){
+        List<Product> list = productRepository.findAll();
+        List<ProductResponse> productResponseList = new ArrayList<>();
+        for(Product product : list){
+            ProductResponse productResponse = ProductResponse.builder()
+                    .id(product.getId())
+                    .name(product.getName())
+                    .slug(product.getSlug())
+                    .sizes(product.getSizes())
+                    .colors(product.getColor())
+                    .image1(product.getImage1())
+                    .image2(product.getImage2())
+                    .image3(product.getImage3())
+                    .typeResponses(TypeMapper.toListResponse((List<Type>) product.getTypes()))
+                    .build();
+            productResponseList.add(productResponse);
+        }
+        return productResponseList;
+    }
     public ProductResponse getProduct(String productId){
         Product product = productRepository.findById(productId).orElse(null);
         if(product != null){

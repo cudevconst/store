@@ -14,6 +14,7 @@ public class ProductMapper {
                 .slug(product.getSlug())
                 .colors(product.getColor())
                 .sizes(product.getSizes())
+                .price(product.getPrice())
                 .image1(product.getImage1())
                 .image2(product.getImage2())
                 .image3(product.getImage3())

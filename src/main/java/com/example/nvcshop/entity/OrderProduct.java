@@ -16,6 +16,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class OrderProduct {
     @Id
     @GeneratedValue(generator = "uuid2")

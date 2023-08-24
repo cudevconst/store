@@ -9,7 +9,9 @@ import lombok.*;
 @Builder
 public class OrderResponse {
     private String id;
-    private Integer amout;
+    private Double amout;
+    private String status;
     private AddressResponse address;
+    private OrderProductResponse orderProduct;
 
 }
