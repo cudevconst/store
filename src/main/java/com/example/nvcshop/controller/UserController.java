@@ -4,6 +4,7 @@ import com.example.nvcshop.dto.request.UserRequest;
 import com.example.nvcshop.dto.response.UserResponse;
 import com.example.nvcshop.repository.UserRepository;
 import com.example.nvcshop.service.UserService;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class UserController {
         }
     }
     @GetMapping("")
-    public ResponseEntity<?> getUserById(@RequestParam("id") String userId){
+    public ResponseEntity<?> getUserById(@RequestParam("id") @Parameter(example = "1233445") String userId){
         UserResponse user = userService.getUserById(userId);
         if(user != null){
             return ResponseEntity.ok(user);
@@ -42,7 +43,7 @@ public class UserController {
         }
 
     }
-    @PostMapping("/create")
+    @PostMapping("/register")
     public ResponseEntity<?> createAccount(@RequestParam("email") String email,
                                            @RequestParam("password") String password,
                                            @RequestParam("fullname") String fullName){

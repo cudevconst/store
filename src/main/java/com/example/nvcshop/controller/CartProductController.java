@@ -3,6 +3,7 @@ package com.example.nvcshop.controller;
 import com.example.nvcshop.dto.request.CartProductRequest;
 import com.example.nvcshop.dto.response.CartProductResponse;
 import com.example.nvcshop.service.CartProductService;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class CartProductController {
     private CartProductService cartProductService;
 
     @GetMapping("/{cart_id}")
-    private ResponseEntity<?> findAllById(@PathVariable("cart_id") String id){
+    private ResponseEntity<?> findAllById(@PathVariable("cart_id") @Parameter(example = "ff7797bf-8de0-4a33-81a1-293071675959") String id){
         return ResponseEntity.ok(cartProductService.findAllByCartId(id));
     }
     @PostMapping("/add")

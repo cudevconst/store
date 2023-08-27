@@ -3,6 +3,9 @@ package com.example.nvcshop.controller;
 import com.example.nvcshop.dto.request.TypeRequest;
 import com.example.nvcshop.dto.response.TypeResponse;
 import com.example.nvcshop.service.TypeService;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +38,7 @@ public class TypeController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<?> updateType(@RequestParam("typeId") String typeId, @RequestBody TypeRequest typeRequest){
+    public ResponseEntity<?> updateType(@RequestParam("typeId") @Parameter(example = "074b3e49-b83e-4d3a-9040-65f06965a63f") String typeId, @RequestBody TypeRequest typeRequest){
         TypeResponse typeResponse = typeService.updateTypeProduct(typeId, typeRequest);
         return ResponseEntity.status(200).body(typeResponse);
     }

@@ -4,6 +4,7 @@ import com.example.nvcshop.dto.request.OrderRequest;
 import com.example.nvcshop.dto.response.OrderProductResponse;
 import com.example.nvcshop.dto.response.OrderResponse;
 import com.example.nvcshop.service.OrderProductService;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class OrderProductController {
     private OrderProductService orderProductService;
 
     @GetMapping("/{userId}")
-    private ResponseEntity<?> findAllByUserId(@PathVariable("userId") String userId){
+    private ResponseEntity<?> findAllByUserId(@PathVariable("userId") @Parameter(example = "272888d4-1b7a-4ced-b34c-062e8c97319e") String userId){
         return ResponseEntity.ok(orderProductService.findAllByUserId(userId));
     }
     @PostMapping("/create")

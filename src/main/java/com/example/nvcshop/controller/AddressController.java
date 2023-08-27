@@ -5,6 +5,7 @@ import com.example.nvcshop.dto.response.AddressResponse;
 import com.example.nvcshop.entity.Address;
 import com.example.nvcshop.mapper.AddressMapper;
 import com.example.nvcshop.service.AddressService;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping("/user")
-    private ResponseEntity<?> findAddressByUserId(@RequestParam("userId") String userId){
+    private ResponseEntity<?> findAddressByUserId(@RequestParam("userId") @Parameter(example = "272888d4-1b7a-4ced-b34c-062e8c97319e") String userId){
         List<AddressResponse> addressResponseList = addressService.getAllAddressById(userId);
         if(addressResponseList != null){
             return ResponseEntity.status(200).body(addressResponseList);
@@ -33,7 +34,7 @@ public class AddressController {
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity<?> findAddressById(@PathVariable("id") String id){
+    private ResponseEntity<?> findAddressById(@PathVariable("id") @Parameter(example = "97eb3dc2-67a5-42a1-b388-db76ad29a03f") String id){
         AddressResponse addressResponse = addressService.getAddressById(id);
         if(addressResponse != null){
             return ResponseEntity.status(200).body(addressResponse);
@@ -46,12 +47,12 @@ public class AddressController {
     }
 
     @PostMapping("/create")
-    private ResponseEntity<?> createNewAddress(@RequestParam("userId") String userId,
-                                               @RequestParam("phoneNumber") String phoneNumber,
-                                               @RequestParam("city") String city,
-                                               @RequestParam("district") String district,
-                                               @RequestParam("commune") String commune,
-                                               @RequestParam("details") String details){
+    private ResponseEntity<?> createNewAddress(@RequestParam("userId") @Parameter(example = "272888d4-1b7a-4ced-b34c-062e8c97319e") String userId ,
+                                               @RequestParam("phoneNumber") @Parameter(example = "0999999999") String phoneNumber,
+                                               @RequestParam("city") @Parameter(example = "Ha Noi") String city,
+                                               @RequestParam("district") @Parameter(example = "Thuong Tin") String district,
+                                               @RequestParam("commune") @Parameter(example = "Van Tao") String commune,
+                                               @RequestParam("details") @Parameter(example = "Noi Thon") String details){
         AddressRequest addressRequest = AddressRequest.builder()
                 .phoneNumber(phoneNumber)
                 .city(city)
@@ -64,7 +65,7 @@ public class AddressController {
     }
 
     @PatchMapping("/update")
-    private ResponseEntity<?> updateAddress(@RequestParam("addressId") String userId,
+    private ResponseEntity<?> updateAddress(@RequestParam("addressId") @Parameter(example = "97eb3dc2-67a5-42a1-b388-db76ad29a03f") String userId,
                                             @RequestParam("phoneNumber") String phoneNumber,
                                             @RequestParam("city") String city,
                                             @RequestParam("district") String district,

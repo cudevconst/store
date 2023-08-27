@@ -36,7 +36,7 @@ public class OrderProductService {
         String userId = orderRequest.getUserId();
         String addressId = orderRequest.getAddressId();
         String productId = orderRequest.getProductId();
-
+        System.out.println(userId + " " + addressId + " " + productId);
         User user = userRepository.findById(userId).orElse(null);
         Address address = addressRepository.findById(addressId).orElse(null);
         Product product = productRepository.findById(productId).orElse(null);
